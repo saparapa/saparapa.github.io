@@ -1,9 +1,12 @@
 // Global variables
 int itk = 0;
+int windowwidth = window.innerWidth; 
+int windowheight = window.innerHeight;
+int maxlength = max(windowwidth, windowheight);
 
 // Setup the Processing Canvas
 void setup(){
-  size(800, 800);
+  size(windowwidth, windowheight);
   frameRate(15);
 }
 
@@ -11,8 +14,8 @@ var fisk = [];
 
 // afgør hvilken farve fisken skal have
 void fishColor(fX, fY) {
-    var r = map(fX, 0, 800, 0, 255);
-    var g = map(fY, 0, 800, 0, 255);
+    var r = map(fX, 0, maxlength, 0, 255);
+    var g = map(fY, 0, maxlength, 0, 255);
     return color(r, g, 150);
 };
 
@@ -21,8 +24,8 @@ Class Fish(fX, fY) {
     this.fX = fX;
     this.fY = fY;
     this.bColor = fishColor(fX, fY);
-    this.bLength = 78 * map(fX, 0, 800, 0.5, 0.9);
-    this.bHeight = 44 * map(fY, 0, 800, 0.7, 0.9);
+    this.bLength = 78 * map(fX, 0, maxlength, 0.5, 0.9);
+    this.bHeight = 44 * map(fY, 0, maxlength, 0.7, 0.9);
     this.tWidth = this.bLength/4;
     this.tHeight = this.bHeight/2;
 };
@@ -56,8 +59,8 @@ void start() {
     fill(191, 242, 245);
     textSize(18);
     textAlign(CENTER, CENTER);
-    text("Tegn fisk ved at klikke med musen", 400, 380);
-    text("Få dem til at svømme med højre piletast", 400, 420);
+    text("Tegn fisk ved at klikke med musen", windowwidth/2, windowheight/2 - 30);
+    text("Få dem til at svømme med højre piletast", windowwidth/2, windowheight/2 + 20);
 };
 
 void draw() {
@@ -75,7 +78,7 @@ void keyPressed() {
         for (var i = 0; i < fisk.length; i++) {
 
             // fiskene svømmer rundt
-            if (fisk[i].fX > 850) {
+            if (fisk[i].fX > windowwidth + 40) {
                 fisk[i].fX = -40;
             } else {
                 fisk[i].fX += 2;
@@ -83,8 +86,8 @@ void keyPressed() {
             
             // fiskene kan ikke svømme oven eller neden ud
             if (fisk[i].fY < -40) {
-                fisk[i].fY = 840;
-            } else if (fisk[i].fY > 840) {
+                fisk[i].fY = windowheight + 40;
+            } else if (fisk[i].fY > windowheight + 40) {
                 fisk[i].fY = -40;
             }
             // nogen fisk svømmer op andre ned
