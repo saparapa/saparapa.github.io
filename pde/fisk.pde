@@ -1,5 +1,4 @@
 // Global variables
-int itk = 0;
 int windowwidth = window.innerWidth; 
 int windowheight = window.innerHeight;
 int maxlength = max(windowwidth, windowheight);
@@ -8,6 +7,7 @@ int maxlength = max(windowwidth, windowheight);
 void setup(){
   size(windowwidth, windowheight);
   frameRate(15);
+  start();
 }
 
 var fisk = [];
@@ -61,13 +61,6 @@ void start() {
     textAlign(CENTER, CENTER);
     text("Tegn fisk ved at klikke med musen", windowwidth/2, windowheight/2 - 30);
     text("Få dem til at svømme med højre piletast", windowwidth/2, windowheight/2 + 20);
-};
-
-void draw() {
-    if (itk === 0) {
-        start();
-        itk = 1;
-     }
 };
 
 
